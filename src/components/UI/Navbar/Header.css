@@ -1,0 +1,38 @@
+.Navbar {
+    height: fit-content;
+    text-align: center;
+    background-color: #2C2C32;
+    padding: 1rem 0;
+}
+
+.Navbar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.Navbar ul li {
+    display: inline-block;
+}
+
+.Navbar a {
+    text-decoration: none;
+    color: white;
+     margin-right: 32px; 
+    padding: 0 5px 5px;
+}
+
+.Navbar a:hover {
+    border-bottom: 1px solid #0f7dc6;
+}
+
+.Navbar .active {
+    color: #0f7dc6;
+}
+
+.Navbar span.counter {
+    font-size: 0.7rem;
+    vertical-align: top;
+    margin-left: 5px;
+    color: #0f7dc6;
+    font-weight: bold;
+}

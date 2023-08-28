@@ -1,0 +1,26 @@
+.fvr-button {
+    height: 35px;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid rgb(160, 151, 149);
+    border-radius: 5px;
+    padding: 0 15px;
+    max-width: fit-content;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.fvr-button-active svg {
+    fill: #0f7dc6;
+}
+
+.fvr-button:hover {
+    background-color: rgb(255, 166, 0);
+}
+
+.fvr-button img {
+    height: 24px;
+    width: 24px;
+}

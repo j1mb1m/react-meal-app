@@ -1,0 +1,58 @@
+.meal-items {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.meal-item {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    background-clip: border-box;
+    border: 1px solid rgba(0, 0, 0, .125);
+    border-radius: 5px;
+    margin: 15px;
+    cursor: pointer;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
+
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+
+    padding-bottom: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.meal-item:hover {
+    transform: scale(1.05);
+    box-shadow: 5px 5px 10px rgba(129, 72, 2, 0.15);
+}
+
+.meal-item  .img {
+    height: 200px;
+    overflow: hidden;
+
+    display: flex;
+    align-items: center;
+}
+
+.meal-item .img img {
+    width: 100%;
+}
+
+.meal-item .title,
+.meal-item .btn
+ {
+    height: 60px;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+
+    padding: 10px;
+    transition: all 0.3s ease-in-out;
+}
+
+.meal-item:hover .title {
+    color: rgb(255, 140, 0);
+}
