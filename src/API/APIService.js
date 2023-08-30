@@ -24,14 +24,16 @@ export default class APIService {
         alphabet.forEach(letter => urls.push(API_SEARCH_BY_LETTER + letter));
 
         await Promise.all(
-            urls.map(url => this.#getApiResource(url))
-        ).then((values) => {
-            values.forEach(value => {
-                if (value.meals !== null) {
-                    meals = [...meals, ...value.meals]
-                }
+            urls.map((url) => {
+                return this.#getApiResource(url)
+            }))
+            .then((values) => {
+                values.forEach(value => {
+                    if (value.meals !== null) {
+                        meals = [...meals, ...value.meals]
+                    }
+                })
             })
-        })
         return meals;
     }
 

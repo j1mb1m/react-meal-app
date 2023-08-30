@@ -11,7 +11,7 @@ const favoriteSlice = createSlice({
       state.data.push({
         id: action.payload.id,
         name: action.payload.name,
-        image: action.payload.image
+        image: action.payload.image,
       })
     },
     removeFromFavorite(state, action) {

@@ -1,26 +1,21 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate } from 'react-router';
 import { FavoriteButton } from './UI/button/FavoriteButton';
-import PropTypes from 'prop-types';
-import { addToFavorite, removeFromFavorite } from "../store/reducers/favoriteSlice";
-import { useState } from 'react';
-import { useEffect } from 'react';
+/* import PropTypes from 'prop-types';  */
 import './FavoriteCard.css';
+import { memo } from 'react';
+import { useNavigate } from 'react-router';
 
-function FavoriteCard({ id, name, image }, ref) {
+
+function FavoriteCard({ id, name, image, cbRemove }, ref) {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
-    const storeDate = useSelector(state => state.favorite);
 
-    const remove = () => {
-        dispatch(removeFromFavorite(id));
-    }
+    console.log(id);
 
     return (
+
         <div ref={ref} className='favorite-item' onClick={() => navigate(`/recipe/${name}`)}  >
             <div className='img'>
-                <img src={image} />
+                <img src={image + '/preview'} />
             </div>
             <div className='title'>
                 {name}
@@ -29,7 +24,7 @@ function FavoriteCard({ id, name, image }, ref) {
                 <FavoriteButton isActive={true} onClick={(e) => {
                     e.stopPropagation();
                     e.preventDefault();
-                    remove();
+                    cbRemove(id);
                 }}>Remove from favorite</FavoriteButton>
             </div>
         </div>
@@ -41,4 +36,4 @@ function FavoriteCard({ id, name, image }, ref) {
     image: PropTypes.string.isRequired,
 } */
 
-export default React.forwardRef(FavoriteCard);
+export default memo(React.forwardRef(FavoriteCard));

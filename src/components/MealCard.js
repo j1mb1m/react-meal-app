@@ -7,7 +7,7 @@ import { addToFavorite, removeFromFavorite } from "../store/reducers/favoriteSli
 import { useState } from 'react';
 import { useEffect } from 'react';
 
-function MealCard({ id, name, image }, ref) {
+function MealCard({ id, name, image }) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const storeDate = useSelector(state => state.favorite);
@@ -31,9 +31,9 @@ function MealCard({ id, name, image }, ref) {
 
 
     return (
-        <div className='meal-item' ref={ref} onClick={() => navigate(`/recipe/${name}`)}  >
+        <div className='meal-item' onClick={() => navigate(`/recipe/${name}`)}  >
             <div className='img'>
-                <img src={image} />
+                <img src={image} loading='lazy' decoding='async' alt={name}/>
             </div>
             <div className='title'>
                 {name}
@@ -64,4 +64,4 @@ function MealCard({ id, name, image }, ref) {
     image: PropTypes.string.isRequired,
 } */
 
-export default React.forwardRef(MealCard);
+export default MealCard;

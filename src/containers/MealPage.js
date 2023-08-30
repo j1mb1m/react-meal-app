@@ -114,10 +114,10 @@ function MealPage() {
             {Error && <h1>The error occurred</h1>}
             {<div className='meal-items' >
                 {visibleMeals.map(el =>
-                    <MealCard ref={lastElement} key={el.idMeal} id={el.idMeal} name={el.strMeal} image={el.strMealThumb} />
+                    <MealCard key={el.idMeal} id={el.idMeal} name={el.strMeal} image={el.strMealThumb} />
                 )}
             </div>}
-            {/*     <div ref={lastElement} style={{ height: 0 }} /> */}
+            <div ref={lastElement} style={{ height: 0 }} />
             <Pagination totalPages={totalPages} page={page} changePage={changePage}></Pagination>
         </div >
     )

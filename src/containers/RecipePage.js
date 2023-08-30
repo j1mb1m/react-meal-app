@@ -4,6 +4,7 @@ import APIService from '../API/APIService';
 import { useFetching } from '../hooks/useFetching';
 import Loader from '../components/UI/Loader/Loader';
 import './RecipePage.css'
+import CommentsBox from '../components/CommentsBox';
 
 function RecipePage() {
   const params = useParams();
@@ -56,6 +57,8 @@ function RecipePage() {
 
           <a href={el.strYoutube}>watch youtube</a>
           <a href={el.strSource}>original source</a>
+
+          <CommentsBox />
         </div>
       }
       )}
