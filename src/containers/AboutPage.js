@@ -3,7 +3,9 @@ import PropTypes from 'prop-types'
 
 function AboutPage(props) {
   return (
-    <h1>About page</h1>
+    <div className='container'>
+      <h1>About page</h1>
+    </div>
   )
 }
 
