@@ -17,7 +17,7 @@
 
     justify-content: center;
     align-items: center;
-    text-align: center; 
+    text-align: center;
 
     padding-bottom: 10px;
     transition: transform 0.3s ease-in-out;
@@ -28,7 +28,7 @@
     box-shadow: 5px 5px 10px rgba(129, 72, 2, 0.15);
 }
 
-.meal-item  .img {
+.meal-item .img {
     height: 200px;
     overflow: hidden;
 
@@ -40,9 +40,25 @@
     width: 100%;
 }
 
+.meal-item .comments img {
+    width: 20px;
+    height: 20px;
+}
+
+.meal-item .comments {
+    display: flex;
+    flex-direction: row;
+    gap: 3px;
+    align-items: center;
+}
+
+.meal-item .comments span {
+    height: 26px;
+    font-size: 16px;
+}
+
 .meal-item .title,
-.meal-item .btn
- {
+.meal-item .btn {
     height: 60px;
     font-weight: 500;
     font-size: 14px;

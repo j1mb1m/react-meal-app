@@ -58,7 +58,7 @@ function RecipePage() {
           <a href={el.strYoutube}>watch youtube</a>
           <a href={el.strSource}>original source</a>
 
-          <CommentsBox />
+          <CommentsBox id={el.idMeal}/>
         </div>
       }
       )}
