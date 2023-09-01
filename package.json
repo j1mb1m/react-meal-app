@@ -2,7 +2,7 @@
   "name": "react-meal-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://j1mb1m.github.io/react-meal-app",
+  "homepage": "https://j1mb1m.github.io/react-meal-app",
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
     "@testing-library/jest-dom": "^5.17.0",

@@ -1,5 +1,5 @@
 import './App.css';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import MealPage from './containers/MealPage';
 import HomePage from './containers/HomePage';
 import AboutPage from './containers/AboutPage';
@@ -11,7 +11,7 @@ import Favorites from './containers/Favorites';
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <HashRouter>
         <Header />
         <Routes>
           <Route exact path='/' Component={HomePage} />
@@ -21,7 +21,7 @@ function App() {
           <Route exact path='/about' Component={AboutPage} />
           <Route exact path='/favorites' Component={Favorites} />
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
 
     </>
   );
