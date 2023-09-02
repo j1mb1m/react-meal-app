@@ -136,9 +136,11 @@
 
   .Navbar ul li {
     display: block;
-    padding: 6px 15px;
+    padding: 4px 15px;
     text-align: start;
-    width: 100%;
   }
 
+  .Navbar a {
+    display: block;
+  }
 }
