@@ -23,19 +23,21 @@ const CommentsBox = ({ id }) => {
 
     const data = useLazyLoading(loadedData, lastElement);
 
-    const sendComment = () => {
+    const sendComment = (e) => {
+        e.preventDefault();
 
-        if (validForm()) {
-            setDoc(doc(db, "comments", id), {
-                data: arrayUnion({
-                    user,
-                    milliseconds: new Date().getTime(),
-                    value: comment
-                })
-            }, { merge: true })
-            setUser('');
-            setComment('');
-        }
+        if (!validForm()) return;
+
+        setDoc(doc(db, "comments", id), {
+            data: arrayUnion({
+                user,
+                milliseconds: new Date().getTime(),
+                value: comment
+            })
+        }, { merge: true })
+        setUser('');
+        setComment('');
+
     }
 
     const validForm = () => {
@@ -46,8 +48,8 @@ const CommentsBox = ({ id }) => {
         <div className='comments-box'>
             <h2>All comments:</h2>
             <form className='comment-form' >
-                <input type='text' name='name' placeholder="Your name..." defaultValue={user} onChange={(e) => setUser(e.target.value)} />
-                <textarea placeholder="Add a comment..." defaultValue={comment} onChange={(e) => setComment(e.target.value)} />
+                <input type='text' name='name' placeholder="Your name..." value={user} onChange={(e) => setUser(e.target.value)} />
+                <textarea placeholder="Add a comment..." value={comment} onChange={(e) => setComment(e.target.value)} />
                 <button type='button' disabled={!validForm()} onClick={sendComment}>Send</button>
             </form>
             <div className='comment-wrapper'>
