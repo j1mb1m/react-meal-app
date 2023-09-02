@@ -59,14 +59,14 @@ function MealCard({ id, name, image }) {
                         e.preventDefault();
                         remove();
                     }
-                    }>Remove from favorite</FavoriteButton>
+                    }>Remove from favorites</FavoriteButton>
                     :
                     <FavoriteButton isActive={isFavorite} onClick={(e) => {
                         e.stopPropagation();
                         e.preventDefault();
                         add();
                     }
-                    }>Add to favorite</FavoriteButton>
+                    }>Add to favorites</FavoriteButton>
                 }
             </div>
         </div>

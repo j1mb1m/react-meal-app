@@ -30,3 +30,9 @@
 .page-wrapper li:hover:not(.active) {
     background-color: #ddd;
 }
+
+@media (max-width: 350px) {
+    .page-wrapper li {
+        padding: 4px 8px;
+    }
+}

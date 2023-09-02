@@ -18,7 +18,8 @@ export default class APIService {
     }
 
     static async getMeals() {
-        const alphabet = [...'abcdefghijklmnopqrstuvwxyz'];
+/*         const alphabet = [...'abcdefghijklmnopqrstuvwxyz']; */
+        const alphabet = [...'abcdefghjlmnoprstuwxyz'];
         const urls = [];
         let meals = [];
         alphabet.forEach(letter => urls.push(API_SEARCH_BY_LETTER + letter));

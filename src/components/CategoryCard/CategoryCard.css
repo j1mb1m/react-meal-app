@@ -1,23 +1,22 @@
+.MealCategory {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
 .category-item {
     position: relative;
-    display: flex;
-    flex-direction: column;
-
+    width: 300px;
     background-color: #fff;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, .125);
-    border-radius: 5px;
-    margin: 15px;
-
+    border-radius: 3px;
+    margin: 10px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, .15);
 
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-
-    cursor: pointer;
-
     transition: transform 0.5s ease-in-out;
+    cursor: pointer;
 }
 
 .category-item:hover {
@@ -25,7 +24,7 @@
 }
 
 .category-item .img {
-    height: 200px;
+    height: 150px;
     overflow: hidden;
 
     display: flex;
@@ -45,12 +44,11 @@
     justify-content: center;
     padding: 10px;
 
-    font-size: 24px;
-
+    font-size: 20px;
     transition: all 0.3s ease-in-out;
 }
 
-.category-item:hover .title {
-    background-color: rgb(255, 140, 0);
-    color: #fff;
+.category-item:hover {
+    box-shadow: 5px 5px 10px rgba(239, 133, 3, 0.3);
+    color: rgb(255, 140, 0);
 }

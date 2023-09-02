@@ -2,15 +2,16 @@ import React, { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom';
 
 import './MealPage.css';
-import { useFetching } from '../hooks/useFetching';
-import APIService from '../API/APIService';
-import MealCard from '../components/MealCard';
-import Loader from '../components/UI/Loader/Loader';
-import { CustomSelect } from '../components/UI/select/CustomSelect';
-import { Pagination } from '../components/UI/pagination/Pagination';
-import { getPageData } from '../utils/pages';
-import { getURLSearchParams } from '../utils/url';
+import { useFetching } from '../../hooks/useFetching';
+import APIService from '../../API/APIService';
+import MealCard from '../../components/MealCard';
+import Loader from '../../components/UI/Loader/Loader';
+import { CustomSelect } from '../../components/UI/select/CustomSelect';
+import { Pagination } from '../../components/UI/pagination/Pagination';
+import { getPageData } from '../../utils/pages';
+import { getURLSearchParams } from '../../utils/url';
 import { useRef } from 'react';
+import { useLazyLoading } from '../../hooks/useLazyLoading';
 
 
 function MealPage() {
@@ -18,20 +19,16 @@ function MealPage() {
     const [searchParams, setSearchParams] = useSearchParams();
     const ALL = 'All';
     const pageLimit = 51;
-    const pagePortionLimit = 3;
     const [meals, setMeals] = useState([]);
-    const [visibleMeals, setVisibleMeals] = useState([]);
     const [categories, setCategories] = useState([]);
-    const [fetchCategories, isLoadingCategories, ErrorCategories] = useFetching(async () => {
+    const [fetchCategories, , ErrorCategories] = useFetching(async () => {
         const data = await APIService.getCategories();
         setCategories(data);
     });
     const [selectedCategory, setSelectedCategory] = useState(ALL);
     const [page, setPage] = useState(1);
-    const [pagePortion, setPagePortion] = useState(0);
     const [totalPages, setTotalPages] = useState(1);
     const lastElement = useRef();
-    const observer = useRef();
 
     const [fetchData, isLoading, Error] = useFetching(async (name, limit, page) => {
         let data = [];
@@ -45,9 +42,6 @@ function MealPage() {
         const result = getPageData(data, limit, page);
         setTotalPages(result.totalCount);
         setMeals(result.data);
-        const visibleResult = getPageData(result.data, pagePortionLimit, 1);
-        setVisibleMeals(visibleResult.data);
-        setPagePortion(1);
     });
 
     useEffect(() => {
@@ -59,22 +53,7 @@ function MealPage() {
         fetchCategories();
     }, []);
 
-    useEffect(() => {
-        if (!meals.length) return;
-        if (observer.current) observer.current.disconnect();
-        var callback = function (entries, observer) {
-            if (entries[0].isIntersecting && pagePortion < pageLimit / pagePortionLimit) {
-                const visibleResult = getPageData(meals, pagePortionLimit * pagePortion, 1);
-                setVisibleMeals(visibleResult.data);
-                setPagePortion(prev => prev + 1);
-            }
-
-        };
-        if (lastElement.current) {
-            observer.current = new IntersectionObserver(callback);
-            observer.current.observe(lastElement.current);
-        }
-    }, [pagePortion, meals]);
+    const data = useLazyLoading(meals, lastElement, 3);
 
     useEffect(() => {
         const search = getURLSearchParams(searchParams);
@@ -90,7 +69,7 @@ function MealPage() {
         const search = getURLSearchParams(searchParams);
         window.scrollTo(0, 0);
         setSearchParams({ ...search, page })
-        setPage(page);
+        resetPage(page);
     }
 
     const changeFilter = (value) => {
@@ -99,7 +78,13 @@ function MealPage() {
         else
             setSearchParams({ category: value })
         setSelectedCategory(value);
-        setPage(1);
+        resetPage(1);
+    }
+
+    function resetPage(pageNumber) {
+        setPage(pageNumber);
+        data.setItems([]);
+        data.setVisibleCount(0);
     }
 
     return (
@@ -113,7 +98,7 @@ function MealPage() {
             {isLoading && <Loader />}
             {Error && <h1>The error occurred</h1>}
             {<div className='meal-items' >
-                {visibleMeals.map(el =>
+                {data.items.map(el =>
                     <MealCard key={el.idMeal} id={el.idMeal} name={el.strMeal} image={el.strMealThumb} />
                 )}
             </div>}

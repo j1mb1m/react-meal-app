@@ -1,5 +1,5 @@
 import React from 'react'
-import { FavoriteButton } from './UI/button/FavoriteButton';
+import { FavoriteButton } from '../UI/button/FavoriteButton';
 /* import PropTypes from 'prop-types';  */
 import './FavoriteCard.css';
 import { memo } from 'react';
@@ -9,13 +9,11 @@ import { useNavigate } from 'react-router';
 function FavoriteCard({ id, name, image, cbRemove }, ref) {
     const navigate = useNavigate();
 
-    console.log(id);
-
     return (
 
         <div ref={ref} className='favorite-item' onClick={() => navigate(`/recipe/${name}`)}  >
             <div className='img'>
-                <img src={image + '/preview'} />
+                <img src={image + '/preview'} alt={name} />
             </div>
             <div className='title'>
                 {name}
@@ -25,7 +23,7 @@ function FavoriteCard({ id, name, image, cbRemove }, ref) {
                     e.stopPropagation();
                     e.preventDefault();
                     cbRemove(id);
-                }}>Remove from favorite</FavoriteButton>
+                }}>Remove</FavoriteButton>
             </div>
         </div>
     )

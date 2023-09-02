@@ -7,8 +7,10 @@ function CategoryCard(props) {
     const navigate = useNavigate();
 
     return (
-        <div className='category-item' onClick={() => navigate(`/meals/${props.title}`)}  >
-            <img src={props.image}></img>
+        <div className='category-item' onClick={() => navigate(`/meals?category=${encodeURIComponent(props.title)}`)}  >
+            <div className='img'>
+                <img src={props.image} alt={props.title}></img>
+            </div>
             <div className='title'>
                 {props.title}
             </div>

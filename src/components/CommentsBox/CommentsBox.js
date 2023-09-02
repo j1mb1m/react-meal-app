@@ -1,26 +1,28 @@
-import React, { useEffect, useState } from 'react';
-import CommentItem from './CommentItem';
+import React, { useEffect, useRef, useState } from 'react';
+import CommentItem from '../CommentsItem/CommentItem';
 import './CommentsBox.css'
 import { arrayUnion, collection, doc, onSnapshot, setDoc } from 'firebase/firestore';
-import db from '../API/firebase';
+import db from '../../API/firebase';
+import { useLazyLoading } from '../../hooks/useLazyLoading';
 
 const CommentsBox = ({ id }) => {
 
-    const [user, setUser] = useState("");
-    const [comment, setComment] = useState("");
-    const [data, setData] = useState([]);
+    const [user, setUser] = useState('');
+    const [comment, setComment] = useState('');
+    const [loadedData, setloadedData] = useState([]);
+    const lastElement = useRef();
 
     useEffect(
         () => {
-            validForm();
-
             onSnapshot(collection(db, "comments"), (snapshot) => {
                 const arr = [];
                 snapshot.docs.filter(item => item.id === id).map((items) => items.data().data.map(el => arr.push(el)));
-                setData(arr);
+                setloadedData(arr);
             })
         }, []);
-        
+
+    const data = useLazyLoading(loadedData, lastElement);
+
     const sendComment = () => {
 
         if (validForm()) {
@@ -31,11 +33,12 @@ const CommentsBox = ({ id }) => {
                     value: comment
                 })
             }, { merge: true })
+            setUser('');
+            setComment('');
         }
     }
 
     const validForm = () => {
-
         return (!!user && !!comment);
     }
 
@@ -43,19 +46,20 @@ const CommentsBox = ({ id }) => {
         <div className='comments-box'>
             <h2>All comments:</h2>
             <form className='comment-form' >
-                <input type='text' name='name' placeholder="Your name..." onChange={(e) => setUser(e.target.value)} />
-                <textarea placeholder="Add a comment..." onChange={(e) => setComment(e.target.value)} />
+                <input type='text' name='name' placeholder="Your name..." defaultValue={user} onChange={(e) => setUser(e.target.value)} />
+                <textarea placeholder="Add a comment..." defaultValue={comment} onChange={(e) => setComment(e.target.value)} />
                 <button type='button' disabled={!validForm()} onClick={sendComment}>Send</button>
             </form>
             <div className='comment-wrapper'>
                 {
-                    data.map(item => <CommentItem
+                    data.items.map(item => <CommentItem
                         key={item.milliseconds}
                         user={item.user}
                         milliseconds={item.milliseconds}
                         comment={item.value} />)
                 }
             </div>
+            <div ref={lastElement} style={{ height: 0 }} />
         </div>
     );
 };

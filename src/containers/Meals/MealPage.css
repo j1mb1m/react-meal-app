@@ -72,3 +72,16 @@
 .meal-item:hover .title {
     color: rgb(255, 140, 0);
 }
+
+@media (max-width: 920px) {
+    .meal-items {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media (max-width: 570px) {
+    .meal-items {
+        grid-template-columns: 1fr;
+    }
+}
