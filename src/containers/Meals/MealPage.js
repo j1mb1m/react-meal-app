@@ -103,7 +103,8 @@ function MealPage() {
                 )}
             </div>}
             <div ref={lastElement} style={{ height: 0 }} />
-            <Pagination totalPages={totalPages} page={page} changePage={changePage}></Pagination>
+            {!isLoading &&
+                <Pagination totalPages={totalPages} page={page} changePage={changePage}></Pagination>}
         </div >
     )
 }
