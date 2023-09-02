@@ -26,7 +26,7 @@ const Header = () => {
                     <div className={isOpenMenu ? 'hamburger-menu open-menu' : 'hamburger-menu'} onClick={changeStyle}>
                         <span></span>
                     </div>
-                    <ul className={isOpenMenu ? 'open-menu' : ''}>
+                    <ul className={isOpenMenu ? 'open-menu' : ''} onClick={()=>setIsOpenMenu(false)}>
                         <li><NavLink to='/'>Home</NavLink></li>
                         <li><NavLink to='/meals' >Recipes</NavLink></li>
                         <li><NavLink to='/about' >About</NavLink></li>
